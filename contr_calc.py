@@ -24,7 +24,6 @@ async def action(message:types.Message):
 	global exp_string
 	global value_type
 	if '=' in message.text:
-		print(message.text.split('=')[0].lower())
 		if message.text.split('=')[0].lower()=='тип':
 			if	message.text.split('=')[-1]=='1':
 				value_type = '1'
@@ -38,25 +37,24 @@ async def action(message:types.Message):
 			await bot.send_message(message.from_user.id, text=
 														f'Ты выбрал тип чисел: {value_type_str}\n '
 														f'Теперь введи выражение x=[твоё выражение с вещественными или комплексными числами] \n'
-														f'Например: x=3+4*(3/2)*10+3*5')         
+														f'Например: х=3+4*(3/2)*10+3*5')         
 
 		elif message.text.split('=')[0].lower()=='х' or message.text.split('=')[0].lower()=='х':
 			if value_type=='1' or value_type=='2':
 				exp_string=message.text.split('=')[1]	
 				expression=pars(exp_string)
 				result=calc(expression,value_type)
-				await bot.send_message(message.from_user.id, text=f'{message.from_user.first_name}'
-																	f'х={result} \n')
+				await bot.send_message(message.from_user.id, text=f'х={result[0]} \n')
 				exp_str=''
 				value_type=''
 			else:
-				await bot.send_message(message.from_user.id, text=f'{message.from_user.first_name}'
+				await bot.send_message(message.from_user.id, text=
 																	f'Ты ещё не выбрал тип чисел: введи "Тип=Х",где Х - "1" или "2". \n'
 																	f'1 - комплексные '
 																	f'2 - вещественные ')
 			
 	else:
-		await bot.send_message(message.from_user.id, text=f'{message.from_user.first_name}'
+		await bot.send_message(message.from_user.id, text=
 																	f'Я знаю только команды:. \n'
 																	f'/start \n '
 																	f'/game \n'
